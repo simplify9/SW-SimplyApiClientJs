@@ -9,6 +9,13 @@ import RequestOptions from '../Models/RequestOptions';
 import GetClientConfig, { GetOnAuthFail, GetRefreshAuth } from './ClientConfigProvider';
 
 const ClientFactory = (clientConfig?: ClientConfig) => {
+  // Check if axios is available
+  if (!Axios || typeof Axios.create !== 'function') {
+    throw new Error(
+      '@simplify9/simplyapiclient requires axios as a peer dependency. Please install axios: npm install axios'
+    );
+  }
+
   const serverAxios = Axios.create();
 
   serverAxios.interceptors.request.use(
