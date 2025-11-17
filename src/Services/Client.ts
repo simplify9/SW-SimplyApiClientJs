@@ -14,10 +14,7 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
 
   serverAxios.interceptors.request.use(
     (config) => {
-      let headers = {};
-
       const clientConfiguration = clientConfig ? clientConfig : GetClientConfig()
-
 
       if (
         clientConfiguration.authType &&
@@ -25,13 +22,9 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
         clientConfiguration.getBearer &&
         clientConfiguration.getBearer() != null
       ) {
-        headers = {
-          ...headers,
-          Authorization: `Bearer ${clientConfiguration.getBearer()}`,
-        };
+        config.headers.Authorization = `Bearer ${clientConfiguration.getBearer()}`;
       }
 
-      config.headers = headers;
       config.baseURL = clientConfiguration.baseUrl;
 
       return config;
@@ -126,7 +119,7 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
           body,
         );
     },
-    SimplyDeleteAsync: async (uri: string, options?: RequestOptions): Promise<ApiResponse> => {
+    SimplyDeleteAsync: async (uri: string, body?: any, options?: RequestOptions): Promise<ApiResponse> => {
         return await serverAxios.delete(uri);
     },
     SimplyPostFormAsync: async (uri: string, formData: any, options?: RequestOptions): Promise<any>=> {// Promise<ApiResponse> => {
