@@ -1,48 +1,41 @@
-import ClientConfigModel from "../Models/ClientConfig";
-
+import ClientConfigModel from '../Models/ClientConfig';
 
 let ClientConfig: ClientConfigModel = {
-    baseUrl: '',
+  baseUrl: '',
 };
 
-export const SetOnAuthFail = (callBack:()=>any) => {ClientConfig = {
-                                                      ...GetClientConfig(),
-                                                      onAuthFail: callBack,
-                                                    };
-
-};
-
-export const SetBaseUrl = (url: string) => ( SetClientConfig({
+export const SetOnAuthFail = (callBack: () => any) => {
+  ClientConfig = {
     ...GetClientConfig(),
-    baseUrl: url
-}));
+    onAuthFail: callBack,
+  };
+};
+
+export const SetBaseUrl = (url: string) =>
+  SetClientConfig({
+    ...GetClientConfig(),
+    baseUrl: url,
+  });
 
 export const SetAuthType = (authType?: 'bearer') =>
-         SetClientConfig(
-           ({
-             ...GetClientConfig(),
-             authType,
-           }),
-         );
+  SetClientConfig({
+    ...GetClientConfig(),
+    authType,
+  });
 
 export const SetGetBearer = (callBack: () => any) =>
-         SetClientConfig(
-           ({
-             ...GetClientConfig(),
-             getBearer: callBack,
-           }),
-         );
+  SetClientConfig({
+    ...GetClientConfig(),
+    getBearer: callBack,
+  });
 
 export const SetRefreshAuth = (callBack: () => any) =>
-         SetClientConfig(
-           ({
-             ...GetClientConfig(),
-             refreshAuth: callBack,
-           }),
-         );
+  SetClientConfig({
+    ...GetClientConfig(),
+    refreshAuth: callBack,
+  });
 
 export const SetClientConfig = (config: ClientConfigModel) => (ClientConfig = config);
-
 
 export const GetOnAuthFail = () => ClientConfig.onAuthFail;
 export const GetRefreshAuth = () => ClientConfig.refreshAuth;
