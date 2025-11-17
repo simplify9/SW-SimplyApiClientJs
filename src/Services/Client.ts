@@ -12,7 +12,7 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
   // Check if axios is available
   if (!Axios || typeof Axios.create !== 'function') {
     throw new Error(
-      '@simplify9/simplyapiclient requires axios as a peer dependency. Please install axios: npm install axios'
+      '@simplify9/simplyapiclient requires axios as a peer dependency. Please install axios: npm install axios',
     );
   }
 
