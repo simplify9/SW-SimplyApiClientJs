@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 import ApiResponse from '../Models/ApiResponse';
 import ClientConfig from '../Models/ClientConfig';
 
@@ -7,27 +9,6 @@ import RequestOptions from '../Models/RequestOptions';
 import GetClientConfig, { GetOnAuthFail, GetRefreshAuth } from './ClientConfigProvider';
 
 const ClientFactory = (clientConfig?: ClientConfig) => {
-  // Dynamically import axios to handle peer dependency resolution
-  let Axios;
-  try {
-    // Use require to dynamically resolve axios from the consuming app
-    Axios = require('axios');
-    // Handle different module formats
-    if (Axios.default) {
-      Axios = Axios.default;
-    }
-  } catch (error) {
-    throw new Error(
-      '@simplify9/simplyapiclient requires axios as a peer dependency. Please install axios: npm install axios',
-    );
-  }
-
-  if (!Axios || typeof Axios.create !== 'function') {
-    throw new Error(
-      '@simplify9/simplyapiclient: axios is not properly installed or accessible. Please install axios: npm install axios',
-    );
-  }
-
   const serverAxios = Axios.create();
 
   serverAxios.interceptors.request.use(

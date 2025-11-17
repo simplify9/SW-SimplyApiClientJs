@@ -17,13 +17,8 @@
   },
   "author": "Simplify9",
   "license": "MIT",
-  "peerDependencies": {
-    "axios": ">=0.21.1"
-  },
-  "peerDependenciesMeta": {
-    "axios": {
-      "optional": false
-    }
+  "dependencies": {
+    "axios": "^1.13.2"
   },
   "files": [
     "dist/*"
