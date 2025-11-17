@@ -1,4 +1,4 @@
-import ClientFactory from './Services/Client';
+import ClientFactory, { setAxiosInstance } from './Services/Client';
 import ApiResponse from './Models/ApiResponse';
 import RequestOptions from './Models/RequestOptions';
 import ClientConfig from './Models/ClientConfig';
@@ -18,6 +18,7 @@ export {
   RequestOptions,
   ClientConfig,
   ClientFactory,
+  setAxiosInstance,
   GetClientConfig,
   GetBaseUrl,
   SetBaseUrl,
