@@ -1,5 +1,3 @@
-import Axios from 'axios';
-
 import ApiResponse from '../Models/ApiResponse';
 import ClientConfig from '../Models/ClientConfig';
 
@@ -9,17 +7,31 @@ import RequestOptions from '../Models/RequestOptions';
 import GetClientConfig, { GetOnAuthFail, GetRefreshAuth } from './ClientConfigProvider';
 
 const ClientFactory = (clientConfig?: ClientConfig) => {
-  // Check if axios is available
-  if (!Axios || typeof Axios.create !== 'function') {
+  // Dynamically import axios to handle peer dependency resolution
+  let Axios;
+  try {
+    // Use require to dynamically resolve axios from the consuming app
+    Axios = require('axios');
+    // Handle different module formats
+    if (Axios.default) {
+      Axios = Axios.default;
+    }
+  } catch (error) {
     throw new Error(
       '@simplify9/simplyapiclient requires axios as a peer dependency. Please install axios: npm install axios',
+    );
+  }
+
+  if (!Axios || typeof Axios.create !== 'function') {
+    throw new Error(
+      '@simplify9/simplyapiclient: axios is not properly installed or accessible. Please install axios: npm install axios',
     );
   }
 
   const serverAxios = Axios.create();
 
   serverAxios.interceptors.request.use(
-    (config) => {
+    (config: any) => {
       const clientConfiguration = clientConfig ? clientConfig : GetClientConfig();
 
       if (
@@ -35,7 +47,7 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
 
       return config;
     },
-    (error) => {
+    (error: any) => {
       return Promise.reject(error);
     },
   );
@@ -49,7 +61,7 @@ const ClientFactory = (clientConfig?: ClientConfig) => {
         error: response.statusText,
       };
     },
-    async (error) => {
+    async (error: any) => {
       // const originalRequest = error.config;
       // if (401 === error.response.status && !originalRequest._retry) {
       // 	originalRequest._retry = true;
