@@ -4,6 +4,9 @@ on:
     branches:
       - master # Change this to your default branch
   workflow_dispatch:
+permissions:
+  contents: write
+  security-events: read
 jobs:
   npm-publish:
     name: npm-publish
