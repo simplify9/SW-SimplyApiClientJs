@@ -262,3 +262,4 @@ MIT
 ## Contributing
 
 Issues and pull requests are welcome on [GitHub](https://github.com/simplify9/SimplyApiClientJs).
+<!-- test: unrelated change, verifying vuln-gate still blocks while critical alerts remain open (throwaway test PR, will be closed) -->
