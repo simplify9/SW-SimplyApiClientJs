@@ -15,8 +15,8 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: 12.18.2
-      - name: NPM Install
-        run: npm install
+      - name: Install dependencies (Yarn, frozen lockfile)
+        run: yarn install --frozen-lockfile
 
       - name: "npm/registry setup"
         uses: actions/setup-node@v1

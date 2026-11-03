@@ -71,6 +71,5 @@ temp/
 # npm configuration with tokens
 .npmrc
 
-# Package lock files (optional - some teams prefer to include these)
-# package-lock.json
-# yarn.lock
+# Yarn 1 is the package manager (yarn.lock); stop npm recreating its lockfile
+package-lock.json
